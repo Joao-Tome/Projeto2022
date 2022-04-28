@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <title>Cadastro Email</title>
+  </head>
+  <body>
+  <form Method="post" th:action="@{/email/salvar}" th:object="${email}">
+  
+    <h1>Cadastro de Email</h1>
+    
+   	<div class="row">
+   		<div class="mb-3 col-md-6">
+        <input type="text" style="display:none" th:field="*{id}">
+
+        <label>Tipo</label>
+        <input type="text" class="form-control" placeholder="Tipo" th:field="*{Tipo}"
+                th:classappend="${#fields.hasErrors('Tipo')} ? 'is-invalid'"/>
+   		
+        <div class="invalid-feedback">
+          <span th:errors="*{Tipo}"></span>
+        </div>
+
+      </div>
+
+      <div class="mb-3 col-md-6">
+        <label>Email</label>
+        <input type="text" class="form-control" placeholder="Email" th:field="*{Email}"
+               th:classappend="${#fields.hasErrors('Email')} ? 'is-invalid'"/>
+   		
+        <div class="invalid-feedback">
+          <span th:errors="*{Email}"></span>
+        </div>
+
+      </div>
+
+
+      <div class="mb-3 col-md-6">
+        <label>Pessoa</label>
+        <select th:field="*{pessoa.id}" class="form-control" th:classappend="${#fields.hasErrors('pessoa')} ? 'is-invalid'">
+            <option value="">Selecione uma Pessoa.</option>
+            <option th:each="c : ${listaPessoa}" th:value="${c.id}" th:text="${c.PrimeiroNome}" ></option>
+        </select>
+
+        <div class="invalid-feedback">
+          <span th:errors="*{pessoa}"></span>
+        </div>
+        
+      </div>
+   	</div>
+    
+     <input type="submit" class="btn btn-primary">
+
+     <span th:text="${validacao}"></span>
+
+  </form>
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    -->
+  </body>
+</html>
