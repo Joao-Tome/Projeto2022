@@ -7,8 +7,7 @@ import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name="Categorias")
-public class Categoria 
-	extends AbstractEntity<Integer> {
+public class Categoria extends AbstractEntity<Integer> {
 	@NotBlank(message = "O campo Descrição é Obrigatorio")
 	@Column(name="Descricao", nullable = false, length = 80)
 	private String Descricao;

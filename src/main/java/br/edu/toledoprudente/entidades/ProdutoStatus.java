@@ -18,14 +18,14 @@ public class ProdutoStatus extends AbstractEntity<Integer>{
     /**
      * @return String return the Nome
      */
-    public String getNome() {
+    public String getStatus() {
         return Status;
     }
 
     /**
      * @param Nome the Nome to set
      */
-    public void setNome(String status) {
+    public void setStatus(String status) {
         this.Status = status;
     }
 
