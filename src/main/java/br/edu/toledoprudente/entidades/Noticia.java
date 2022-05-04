@@ -17,7 +17,7 @@ public class Noticia extends AbstractEntity<Integer>{
     // @Column(name="DataPub", nullable = false, columnDefinition = "DATE")
     // private LocalDate dataPub;
 
-	@Column(name="urlImage", nullable = false, length = 255)
+	@Column(name="urlImage", length = 255)
     private String urlImage;
 
 
