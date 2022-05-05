@@ -11,54 +11,54 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import br.edu.toledoprudente.dao.CategoriaDAO;
-import br.edu.toledoprudente.entidades.Categoria;
+import br.edu.toledoprudente.dao.ParceiroDAO;
+import br.edu.toledoprudente.entidades.Parceiros;
 @Controller
-@RequestMapping("/categoria")
-public class CategoriaController {
-
+@RequestMapping("/parceiro")
+public class ParceiroController {
     @Autowired
-    CategoriaDAO dao;
+    ParceiroDAO dao;
 
 
     @GetMapping("/listar")
     public String listar(ModelMap model){
         var lista = dao.findAll();
-        model.addAttribute("listacategorias",lista);
-        return "/categoria/listar";
+        model.addAttribute("listaParceiro",lista);
+        return "/parceiro/listar";
     }
 
     @GetMapping("/novo")
     public String novo(ModelMap model){
-        model.addAttribute("categoria",new Categoria());
-        return "categoria/cadastro";
+        model.addAttribute("parceiro",new Parceiros());
+        return "parceiro/cadastro";
     }
 
     @PostMapping("/salvar")
-    public String salvar(@Valid @ModelAttribute("categoria") Categoria obj, BindingResult result,  ModelMap model){
+    public String salvar(@Valid @ModelAttribute("parceiro") Parceiros obj, BindingResult result,  ModelMap model){
         try {
 
 			if (result.hasErrors()){
-				return "/categoria/cadastro";
+				return "/parceiro/cadastro";
 			}
 
 			if(obj.getId() == null){
 
                 dao.save(obj);
 
+
 			}else{
 				dao.update(obj);
 			}
 		} catch (Exception e) {
 		}
-        return "/categoria/cadastro";
+        return "/parceiro/cadastro";
     }
 
     @GetMapping("/alterar")
     public String alterar(int id, ModelMap model){
         var obj = dao.findById(id);
-        model.addAttribute("categoria",obj);
-        return "/categoria/cadastro";
+        model.addAttribute("parceiro",obj);
+        return "/parceiro/cadastro";
     }
 
     @GetMapping("/excluir")
@@ -66,5 +66,4 @@ public class CategoriaController {
         dao.delete(id);
         return this.listar(model);
     }
-
 }
