@@ -1,6 +1,8 @@
 package br.edu.toledoprudente.entidades;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -8,6 +10,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.NumberFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+import org.springframework.format.annotation.NumberFormat.Style;
 
 @Entity
 @Table(name="Produtos")
@@ -21,6 +28,7 @@ public class Produto
 	@Column(name="Nome", nullable = false, length = 80)
 	private String Nome;
 
+    @NumberFormat(style = Style.CURRENCY, pattern = "###0.00")
 	@NotNull(message = "O Campo valor é Obrigatorio")
 	@Column(name="Valor", nullable = false, columnDefinition = "DECIMAL(10,2) DEFAULT 0.00")
 	private BigDecimal Valor; 
@@ -28,10 +36,12 @@ public class Produto
 	@NotNull(message = "O Campo Quantidade é Obrigatorio")
 	@Column(name="Quantidade", nullable = false)
 	private Integer Quantidade;
-	/*
+
+    @NotNull(message = "O Campo Data Validade é Obrigatorio")
+    @DateTimeFormat(iso=ISO.DATE)
 	@Column(name="DataValidade", nullable = false, columnDefinition = "DATE")
 	private LocalDate DataValidade;
-*/
+
 	@NotNull(message = "O campo Categoria é Obrigatorio")
 	@ManyToOne
 	@JoinColumn(name="IdCategoria")
@@ -46,9 +56,6 @@ public class Produto
 	@ManyToOne
 	@JoinColumn(name="IdProdutoStatus")
 	private ProdutoStatus prodstatus;
-
-	@Column(name="urlImage", nullable = false, length = 255)
-	private String urlImage;
 
     /**
      * @return String return the Descricao
@@ -106,19 +113,19 @@ public class Produto
         this.Quantidade = Quantidade;
     }
 
-    // /**
-    //  * @return LocalDate return the DataValidade
-    //  */
-    // public LocalDate getDataValidade() {
-    //     return DataValidade;
-    // }
+    /**
+     * @return LocalDate return the DataValidade
+     */
+    public LocalDate getDataValidade() {
+        return DataValidade;
+    }
 
-    // /**
-    //  * @param DataValidade the DataValidade to set
-    //  */
-    // public void setDataValidade(LocalDate DataValidade) {
-    //     this.DataValidade = DataValidade;
-    // }
+    /**
+     * @param DataValidade the DataValidade to set
+     */
+    public void setDataValidade(LocalDate DataValidade) {
+        this.DataValidade = DataValidade;
+    }
 
     /**
      * @return Categoria return the categoria
@@ -150,32 +157,17 @@ public class Produto
 
 
     /**
-     * @return ProdutoStatus return the status
+     * @return ProdutoStatus return the prodstatus
      */
-    public ProdutoStatus getStatus() {
+    public ProdutoStatus getProdstatus() {
         return prodstatus;
     }
 
     /**
-     * @param status the status to set
+     * @param prodstatus the prodstatus to set
      */
-    public void setStatus(ProdutoStatus status) {
-        this.prodstatus = status;
-    }
-
-
-    /**
-     * @return String return the urlImage
-     */
-    public String getUrlImage() {
-        return urlImage;
-    }
-
-    /**
-     * @param urlImage the urlImage to set
-     */
-    public void setUrlImage(String urlImage) {
-        this.urlImage = urlImage;
+    public void setProdstatus(ProdutoStatus prodstatus) {
+        this.prodstatus = prodstatus;
     }
 
 }

@@ -21,6 +21,12 @@
     			<th>Código</th>
     			<th>Nome</th>
     			<th>Descrição</th>
+    			<th>Valor</th>
+    			<th>Quantidade</th>
+    			<th>DataValidade</th>
+    			<th>categoria</th>
+    			<th>marca</th>
+    			<th>prodstatus</th>
           <th>Açoes</th>
     		</tr>
     		
@@ -30,6 +36,12 @@
 				<td th:text="${d.id}"></td>
 				<td th:text="${d.Nome}"></td>
 				<td th:text="${d.Descricao}"></td>
+				<td th:text="${d.Valor}"></td>
+				<td th:text="${d.Quantidade}"></td>
+				<td th:text="${d.DataValidade}"></td>
+				<td th:text="${d.categoria.Descricao}"></td>
+				<td th:text="${d.marca.Nome}"></td>
+				<td th:text="${d.prodstatus.Status}"></td>
         <td>
           <a class="btn btn-primary" 
 				   th:href="@{/produto/alterar(id=${d.id})}" >Alterar</a> 

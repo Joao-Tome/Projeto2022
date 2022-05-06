@@ -14,9 +14,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.edu.toledoprudente.dao.CategoriaDAO;
+import br.edu.toledoprudente.dao.MarcaDAO;
 import br.edu.toledoprudente.dao.ProdutoDAO;
+import br.edu.toledoprudente.dao.ProdutoStatusDAO;
 import br.edu.toledoprudente.entidades.Categoria;
+import br.edu.toledoprudente.entidades.Marca;
 import br.edu.toledoprudente.entidades.Produto;
+import br.edu.toledoprudente.entidades.ProdutoStatus;
 
 @Controller
 @RequestMapping("/produto")
@@ -26,10 +30,29 @@ public class ProdutoController {
 	ProdutoDAO dao;
 	@Autowired
 	CategoriaDAO daoCategoria;
+
+	@Autowired
+	MarcaDAO daomarca;
+
+	@Autowired
+	ProdutoStatusDAO daoStatusProd;
+
 	
 	@ModelAttribute(name="listaCategoria")
 	public List<Categoria> listarCategoria(){
 		var lista = daoCategoria.findAll();
+		return lista;
+	}
+
+	@ModelAttribute(name="listarMarcas")
+	public List<Marca> listarMarcas(){
+		var lista = daomarca.findAll();
+		return lista;
+	}
+
+	@ModelAttribute(name="listarProdStatus")
+	public List<ProdutoStatus> listarProdStatus(){
+		var lista = daoStatusProd.findAll();
 		return lista;
 	}
 
