@@ -15,4 +15,6 @@ public interface IUsuarioDAO {
 	Usuario findById(Integer id);
 	
 	List<Usuario> findAll();
+
+	public Usuario findByUserName(String username);
 }
