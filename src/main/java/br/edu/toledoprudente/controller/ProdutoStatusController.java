@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.edu.toledoprudente.dao.ProdutoStatusDAO;
+import br.edu.toledoprudente.dao.UsuarioDAO;
 import br.edu.toledoprudente.entidades.ProdutoStatus;
+import br.edu.toledoprudente.entidades.Usuario;
 @Controller
 @RequestMapping("/produtostatus")
 public class ProdutoStatusController {
@@ -20,6 +22,15 @@ public class ProdutoStatusController {
     @Autowired
     ProdutoStatusDAO dao;
 
+
+    @Autowired
+	UsuarioDAO usuarioDAO;
+
+	@ModelAttribute(name="usuariologado")
+	public Usuario usuario(){
+		var nome = usuarioDAO.getUsuarioLogado();
+		return nome;
+	}
 
     @GetMapping("/listar")
     public String listar(ModelMap model){

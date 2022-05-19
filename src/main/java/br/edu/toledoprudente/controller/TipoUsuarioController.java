@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.edu.toledoprudente.dao.TipoUsuarioDAO;
+import br.edu.toledoprudente.dao.UsuarioDAO;
+import br.edu.toledoprudente.entidades.Usuario;
 import br.edu.toledoprudente.entidades.tipoUsuario;
 @Controller
 @RequestMapping("/tipousuario")
@@ -20,6 +22,15 @@ public class TipoUsuarioController {
     @Autowired
     TipoUsuarioDAO dao;
 
+
+    @Autowired
+	UsuarioDAO usuarioDAO;
+
+	@ModelAttribute(name="usuariologado")
+	public Usuario usuario(){
+		var nome = usuarioDAO.getUsuarioLogado();
+		return nome;
+	}
 
     @GetMapping("/listar")
     public String listar(ModelMap model){

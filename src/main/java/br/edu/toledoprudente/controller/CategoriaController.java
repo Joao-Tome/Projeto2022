@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.edu.toledoprudente.dao.CategoriaDAO;
+import br.edu.toledoprudente.dao.UsuarioDAO;
 import br.edu.toledoprudente.entidades.Categoria;
+import br.edu.toledoprudente.entidades.Usuario;
 @Controller
 @RequestMapping("/categoria")
 public class CategoriaController {
@@ -20,7 +22,17 @@ public class CategoriaController {
     @Autowired
     CategoriaDAO dao;
 
+    
 
+    @Autowired
+	UsuarioDAO usuarioDAO;
+
+	@ModelAttribute(name="usuariologado")
+	public Usuario usuario(){
+		var nome = usuarioDAO.getUsuarioLogado();
+		return nome;
+	}
+    
     @GetMapping("/listar")
     public String listar(ModelMap model){
         var lista = dao.findAll();

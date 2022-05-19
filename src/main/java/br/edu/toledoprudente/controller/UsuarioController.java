@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -76,6 +77,9 @@ public class UsuarioController {
 			if (result.hasErrors()){
 				return "/usuario/cadastro";
 			}
+
+			var senha = obj.getSenha();
+			obj.setSenha(new BCryptPasswordEncoder().encode(senha));
 
 			if(obj.getId() == null){
 				dao.save(obj);

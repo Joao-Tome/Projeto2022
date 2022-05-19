@@ -17,14 +17,18 @@ import br.edu.toledoprudente.dao.CategoriaDAO;
 import br.edu.toledoprudente.dao.MarcaDAO;
 import br.edu.toledoprudente.dao.ProdutoDAO;
 import br.edu.toledoprudente.dao.ProdutoStatusDAO;
+import br.edu.toledoprudente.dao.UsuarioDAO;
 import br.edu.toledoprudente.entidades.Categoria;
 import br.edu.toledoprudente.entidades.Marca;
 import br.edu.toledoprudente.entidades.Produto;
 import br.edu.toledoprudente.entidades.ProdutoStatus;
+import br.edu.toledoprudente.entidades.Usuario;
 
 @Controller
 @RequestMapping("/produto")
 public class ProdutoController {
+
+	
 
 	@Autowired
 	ProdutoDAO dao;
@@ -37,7 +41,15 @@ public class ProdutoController {
 	@Autowired
 	ProdutoStatusDAO daoStatusProd;
 
-	
+	@Autowired
+	UsuarioDAO usuarioDAO;
+
+	@ModelAttribute(name="usuariologado")
+	public Usuario usuario(){
+		var nome = usuarioDAO.getUsuarioLogado();
+		return nome;
+	}
+
 	@ModelAttribute(name="listaCategoria")
 	public List<Categoria> listarCategoria(){
 		var lista = daoCategoria.findAll();

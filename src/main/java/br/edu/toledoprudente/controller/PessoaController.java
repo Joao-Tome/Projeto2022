@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.edu.toledoprudente.dao.PessoaDAO;
+import br.edu.toledoprudente.dao.UsuarioDAO;
 import br.edu.toledoprudente.entidades.Pessoa;
+import br.edu.toledoprudente.entidades.Usuario;
 
 @Controller
 @RequestMapping("/pessoa")
@@ -21,6 +23,15 @@ public class PessoaController {
     @Autowired
 	PessoaDAO dao;
 	
+
+	@Autowired
+	UsuarioDAO usuarioDAO;
+
+	@ModelAttribute(name="usuariologado")
+	public Usuario usuario(){
+		var nome = usuarioDAO.getUsuarioLogado();
+		return nome;
+	}
 
 	@GetMapping("/cadastro")
 	public String Cadastro(ModelMap model) {

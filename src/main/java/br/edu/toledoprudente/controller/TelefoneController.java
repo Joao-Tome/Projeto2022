@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.edu.toledoprudente.dao.PessoaDAO;
 import br.edu.toledoprudente.dao.TelefoneDAO;
+import br.edu.toledoprudente.dao.UsuarioDAO;
 import br.edu.toledoprudente.entidades.Pessoa;
 import br.edu.toledoprudente.entidades.Telefone;
+import br.edu.toledoprudente.entidades.Usuario;
 
 @Controller
 @RequestMapping("/telefone")
@@ -27,6 +29,16 @@ public class TelefoneController {
 	@Autowired
 	PessoaDAO daoPessoa;
 	
+
+	@Autowired
+	UsuarioDAO usuarioDAO;
+
+	@ModelAttribute(name="usuariologado")
+	public Usuario usuario(){
+		var nome = usuarioDAO.getUsuarioLogado();
+		return nome;
+	}
+
 	@ModelAttribute(name="listaPessoa")
 	public List<Pessoa> listaPessoa(){
 		var lista = daoPessoa.findAll();

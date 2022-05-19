@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.edu.toledoprudente.dao.PessoaDAO;
+import br.edu.toledoprudente.dao.UsuarioDAO;
 import br.edu.toledoprudente.dao.EmailDAO;
 import br.edu.toledoprudente.entidades.Email;
 import br.edu.toledoprudente.entidades.Pessoa;
+import br.edu.toledoprudente.entidades.Usuario;
 
 @Controller
 @RequestMapping("/email")
@@ -27,6 +29,17 @@ public class EmailController {
 	@Autowired
 	PessoaDAO daoPessoa;
 	
+
+
+	@Autowired
+	UsuarioDAO usuarioDAO;
+
+	@ModelAttribute(name="usuariologado")
+	public Usuario usuario(){
+		var nome = usuarioDAO.getUsuarioLogado();
+		return nome;
+	}
+
 	@ModelAttribute(name="listaPessoa")
 	public List<Pessoa> listaPessoa(){
 		var lista = daoPessoa.findAll();
