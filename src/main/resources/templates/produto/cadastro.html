@@ -18,7 +18,7 @@
   <body>
     <div th:include="layout :: nav"></div>
     <div class="container">
-      <form method="post" th:action="@{/produto/salvar}" th:object="${produto}">
+      <form method="post" th:action="@{/produto/salvar}" th:object="${produto}" enctype="multipart/form-data">
         <h1>Cadastro de produto</h1>
 
         <div class="row">
@@ -159,7 +159,16 @@
               <span th:errors="*{prodstatus}"></span>
             </div>
           </div>
-        </div>
+
+
+          <div class="mb-3 col-md-6">
+            <label>file</label>
+            <input type="file" name="file" id="file" class="form-control">
+          </div>
+        </div>  
+
+        <p th:if="${retorno}" th:text="${mensagem}"></p>
+
 
         <input type="submit" class="btn btn-primary" />
 

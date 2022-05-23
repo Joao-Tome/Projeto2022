@@ -57,6 +57,9 @@ public class Produto
 	@JoinColumn(name="IdProdutoStatus")
 	private ProdutoStatus prodstatus;
 
+    @Column(name = "imagem")
+    private String imagem;
+
     /**
      * @return String return the Descricao
      */
@@ -168,6 +171,21 @@ public class Produto
      */
     public void setProdstatus(ProdutoStatus prodstatus) {
         this.prodstatus = prodstatus;
+    }
+
+
+    /**
+     * @return String return the imagem
+     */
+    public String getImagem() {
+        return imagem;
+    }
+
+    /**
+     * @param imagem the imagem to set
+     */
+    public void setImagem(String imagem) {
+        this.imagem = imagem;
     }
 
 }

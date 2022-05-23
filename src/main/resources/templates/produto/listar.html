@@ -30,6 +30,7 @@
               <th>Valor</th>
               <th>Quantidade</th>
               <th>DataValidade</th>
+              <th>Imagem</th>
               <th>categoria</th>
               <th>marca</th>
               <th>prodstatus</th>
@@ -44,6 +45,7 @@
               <td th:text="${d.Valor}"></td>
               <td th:text="${d.Quantidade}"></td>
               <td th:text="${d.DataValidade}"></td>
+              <td><img th:src="@{'/produto/getimagem/'+*{d.imagem}}" width="60px" height="60px" style="object-fit: contain;" class="img-fluid"></td>
               <td th:text="${d.categoria.Descricao}"></td>
               <td th:text="${d.marca.Nome}"></td>
               <td th:text="${d.prodstatus.Status}"></td>

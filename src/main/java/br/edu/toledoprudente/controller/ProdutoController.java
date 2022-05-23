@@ -1,17 +1,29 @@
 package br.edu.toledoprudente.controller;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import br.edu.toledoprudente.dao.CategoriaDAO;
 import br.edu.toledoprudente.dao.MarcaDAO;
@@ -95,18 +107,42 @@ public class ProdutoController {
 	}
 
 	@PostMapping("/salvar")
-	public String Salvar(@Valid @ModelAttribute("produto") Produto obj, BindingResult result, ModelMap model){
+	public String Salvar(@Valid @ModelAttribute("produto") Produto obj, BindingResult result, ModelMap model,
+						 @RequestParam("file") MultipartFile file){
 		try {
+
+			
 
 			if (result.hasErrors()){
 				return "/produto/cadastro";
+			}else{
+				if(file.isEmpty()){
+					model.addAttribute("mensagem","O arquivo é Obrigatorio");
+					model.addAttribute("retorno",true);
+					return "/produto/cadastro";
+				}else{
+					obj.setImagem(file.getOriginalFilename());
+					if(obj.getId() == null){
+						dao.save(obj);
+					}else{
+						dao.update(obj);
+					}
+					
+					try {
+						byte[] bytes = file.getBytes();
+						Path path = Paths.get(System.getProperty("user.dir") + "\\src\\main\\resources\\static\\imagens\\" + file.getOriginalFilename());
+						Files.write(path, bytes);
+					} catch (Exception e) {
+						//TODO: handle exception
+						e.printStackTrace();
+					}
+
+
+					model.addAttribute("validacao","produto Enviado Com Sucesso");
+				}
 			}
 
-			if(obj.getId() == null){
-				dao.save(obj);
-			}else{
-				dao.update(obj);
-			}
+			
 		} catch (Exception e) {
 			//TODO: handle exception
 		}
@@ -133,4 +169,23 @@ public class ProdutoController {
 		return this.Listar(model);
 		
 	}
+
+	@ResponseBody
+	@RequestMapping(value = "/getimagem/{nome}", method = RequestMethod.GET)
+	public HttpEntity<byte[]> download(@PathVariable(value = "nome") String nome) throws IOException {
+		byte[] arquivo =Files.readAllBytes( Paths.get(System.getProperty("user.dir") +"\\src\\main\\resources\\static\\imagens\\" + nome));
+		HttpHeaders httpHeaders = new HttpHeaders();
+		switch (nome.substring(nome.lastIndexOf(".") + 1).toUpperCase()) {
+		case "JPG":
+		httpHeaders.setContentType(MediaType.IMAGE_JPEG);break;
+		case "GIF":
+		httpHeaders.setContentType(MediaType.IMAGE_GIF); break;
+		case "PNG":
+		httpHeaders.setContentType(MediaType.IMAGE_PNG); break;
+		default:
+		break;
+		} httpHeaders.setContentLength(arquivo.length);
+		HttpEntity<byte[]> entity = new HttpEntity<byte[]>( arquivo, httpHeaders);
+		return entity;}
+
 }
