@@ -111,8 +111,6 @@ public class ProdutoController {
 						 @RequestParam("file") MultipartFile file){
 		try {
 
-			
-
 			if (result.hasErrors()){
 				return "/produto/cadastro";
 			}else{

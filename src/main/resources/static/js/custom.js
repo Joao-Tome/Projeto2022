@@ -92,26 +92,6 @@
 				$(athis).addClass('active');
 			});
 		});
-
-		$(window).scroll(function (event) {
-			var scrollPos = $(document).scrollTop() + 80;
-
-			if (scrollPos === 0) {
-				$('a[href^="#welcome"]').addClass('active');
-				return;
-			}
-			$('.menu-item').not('[href=""]').not('[href="javascript:;"]').each(function () {
-				var currLink = $(this);
-				var refElement = $(currLink.attr("href"));
-
-				if (refElement.position().top <= scrollPos && refElement.position().top + refElement.height() > scrollPos) {
-					$('.menu-item').removeClass("active");
-					currLink.addClass("active");
-				} else {
-					currLink.removeClass("active");
-				}
-			});
-		})
 	});
 
 	const Accordion = {

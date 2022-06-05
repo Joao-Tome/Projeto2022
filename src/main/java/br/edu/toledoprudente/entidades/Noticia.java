@@ -1,7 +1,13 @@
 package br.edu.toledoprudente.entidades;
 
+import java.time.LocalDate;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 @Entity
 @Table(name="Noticia")
@@ -14,8 +20,10 @@ public class Noticia extends AbstractEntity<Integer>{
 	@Column(name="Conteudo", columnDefinition="TEXT")
     private String Conteudo;
 
-    // @Column(name="DataPub", nullable = false, columnDefinition = "DATE")
-    // private LocalDate dataPub;
+    // @NotNull(message = "O Campo Data Validade é Obrigatorio")
+    @DateTimeFormat(iso=ISO.DATE)
+    @Column(name="DataPub", nullable = false, columnDefinition = "DATE")
+    private LocalDate dataPub;
 
 	@Column(name="urlImage", length = 255)
     private String urlImage;
@@ -61,6 +69,21 @@ public class Noticia extends AbstractEntity<Integer>{
      */
     public void setUrlImage(String urlImage) {
         this.urlImage = urlImage;
+    }
+
+
+    /**
+     * @return LocalDate return the dataPub
+     */
+    public LocalDate getDataPub() {
+        return dataPub;
+    }
+
+    /**
+     * @param dataPub the dataPub to set
+     */
+    public void setDataPub(LocalDate dataPub) {
+        this.dataPub = dataPub;
     }
 
 }

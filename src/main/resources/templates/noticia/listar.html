@@ -28,7 +28,10 @@
               <th>Código</th>
             <th>Titulo</th>
             <th>Conteudo</th>
+            <th>DataPublicação</th>
+            <th>Imagem</th>
             <th>Açoes</th>
+            
           </tr>
         </thead>
         <tbody>
@@ -36,6 +39,8 @@
             <td th:text="${d.id}"></td>
             <td th:text="${d.Titulo}"></td>
             <td th:text="${d.Conteudo}"></td>
+            <td th:text="${d.dataPub}"></td>
+            <td><img th:src="@{'/noticia/getimagem/'+*{d.urlImage}}" width="60px" height="60px" style="object-fit: contain;" class="img-fluid"></td>
             <td>
               <a
               class="btn btn-primary"

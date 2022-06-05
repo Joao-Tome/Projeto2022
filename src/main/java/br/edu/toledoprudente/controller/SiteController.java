@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.edu.toledoprudente.dao.PessoaDAO;
+import br.edu.toledoprudente.dao.ProdutoDAO;
 import br.edu.toledoprudente.dao.UsuarioDAO;
 import br.edu.toledoprudente.entidades.Pessoa;
 import br.edu.toledoprudente.entidades.Usuario;
@@ -20,8 +21,21 @@ import br.edu.toledoprudente.entidades.Usuario;
 @RequestMapping("/site")
 public class SiteController {
     
+	@Autowired
+	ProdutoDAO daoproduto;
+
+	@Autowired
+	UsuarioDAO daousuario;
+
+
     @GetMapping("")
 	public String home(ModelMap model) {
+		var lista = daoproduto.findAll();
+		
+		model.addAttribute("usuario", daousuario.getUsuarioLogado());
+
+		model.addAttribute("Produtos", lista);
+
 		return "/site/home";
 	}
 	

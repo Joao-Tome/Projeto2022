@@ -37,10 +37,10 @@ public class Produto
 	@Column(name="Quantidade", nullable = false)
 	private Integer Quantidade;
 
-    @NotNull(message = "O Campo Data Validade é Obrigatorio")
-    @DateTimeFormat(iso=ISO.DATE)
-	@Column(name="DataValidade", nullable = false, columnDefinition = "DATE")
-	private LocalDate DataValidade;
+    // @NotNull(message = "O Campo Data Validade é Obrigatorio")
+    // @DateTimeFormat(iso=ISO.DATE)
+	// @Column(name="DataValidade", nullable = false, columnDefinition = "DATE")
+	// private LocalDate DataValidade;
 
 	@NotNull(message = "O campo Categoria é Obrigatorio")
 	@ManyToOne
@@ -116,19 +116,19 @@ public class Produto
         this.Quantidade = Quantidade;
     }
 
-    /**
-     * @return LocalDate return the DataValidade
-     */
-    public LocalDate getDataValidade() {
-        return DataValidade;
-    }
+    // /**
+    //  * @return LocalDate return the DataValidade
+    //  */
+    // public LocalDate getDataValidade() {
+    //     return DataValidade;
+    // }
 
-    /**
-     * @param DataValidade the DataValidade to set
-     */
-    public void setDataValidade(LocalDate DataValidade) {
-        this.DataValidade = DataValidade;
-    }
+    // /**
+    //  * @param DataValidade the DataValidade to set
+    //  */
+    // public void setDataValidade(LocalDate DataValidade) {
+    //     this.DataValidade = DataValidade;
+    // }
 
     /**
      * @return Categoria return the categoria

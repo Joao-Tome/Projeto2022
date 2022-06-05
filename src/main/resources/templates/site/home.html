@@ -12,34 +12,57 @@
     <!-- ***** Preloader Start ***** -->
 	<div th:include="site/layoutSite :: preloader"></div>
     <!-- ***** Preloader End ***** -->
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+
+    <section class="section" id="produtos">
+        <div class="container" style="margin-top: 10rem">
+            <div class="center-heading">
+                <h2>Produtos</h2>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12"
+                    data-scroll-reveal="enter bottom move 30px over 0.6s after 0.4s"
+                    th:each=" d : ${Produtos}">
+                    <div class="features-item">
+                        <div class="features-icon">
+                            <img th:src="@{'/produto/getimagem/'+*{d.imagem}}" alt="">
+                            <h4 th:text="${d.Nome}"></h4>
+                            <p th:text="${d.categoria.Descricao}"></p>
+                            <p>R$ <span th:text="${d.valor}"></p>
+                            <a href="#testimonials" class="main-button">
+                                Detalhes
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="produtos">
+        <div class="container" style="margin-top: 3rem">
+            <div class="center-heading">
+                <h2>Noticias</h2>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12"
+                    data-scroll-reveal="enter bottom move 30px over 0.6s after 0.4s"
+                    th:each=" n : ${noticias}">
+                    <div class="features-item">
+                        <div class="features-icon">
+                            <img th:src="@{'/produto/getimagem/'+*{d.imagem}}" alt="">
+                            <h4 th:text="${d.Nome}"></h4>
+                            <p th:text="${d.categoria.Descricao}"></p>
+                            <p>R$ <span th:text="${d.valor}"></p>
+                            <a href="#testimonials" class="main-button">
+                                Detalhes
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
 
     <!-- ***** Header Area Start ***** -->
     <div th:include="site/layoutSite :: header"></div>
