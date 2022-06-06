@@ -130,8 +130,10 @@ public class ProdutoController {
 						byte[] bytes = file.getBytes();
 						Path path = Paths.get(System.getProperty("user.dir") + "\\src\\main\\resources\\static\\imagens\\" + file.getOriginalFilename());
 						Files.write(path, bytes);
+
+						model.addAttribute("mensagem","success");
 					} catch (Exception e) {
-						//TODO: handle exception
+						model.addAttribute("mensagem","erro");
 						e.printStackTrace();
 					}
 
@@ -142,7 +144,7 @@ public class ProdutoController {
 
 			
 		} catch (Exception e) {
-			//TODO: handle exception
+			model.addAttribute("mensagem","erro");
 		}
 
 		return "/produto/cadastro";

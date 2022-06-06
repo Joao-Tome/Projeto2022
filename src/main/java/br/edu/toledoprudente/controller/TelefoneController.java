@@ -84,8 +84,9 @@ public class TelefoneController {
 			}else{
 				dao.update(obj);
 			}
+			model.addAttribute("mensagem","success");
 		} catch (Exception e) {
-			//TODO: handle exception
+			model.addAttribute("mensagem","erro");
 		}
 
 		return "/telefone/cadastro";

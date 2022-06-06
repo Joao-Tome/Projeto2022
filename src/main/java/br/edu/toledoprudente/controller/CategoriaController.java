@@ -51,6 +51,7 @@ public class CategoriaController {
         try {
 
 			if (result.hasErrors()){
+                
 				return "/categoria/cadastro";
 			}
 
@@ -61,7 +62,9 @@ public class CategoriaController {
 			}else{
 				dao.update(obj);
 			}
+            model.addAttribute("mensagem","success");
 		} catch (Exception e) {
+            model.addAttribute("mensagem","erro");
 		}
         return "/categoria/cadastro";
     }

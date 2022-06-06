@@ -61,7 +61,9 @@ public class ProdutoStatusController {
 			}else{
 				dao.update(obj);
 			}
+            model.addAttribute("mensagem","success");
 		} catch (Exception e) {
+            model.addAttribute("mensagem","erro");
 		}
         return "/produtostatus/cadastro";
     }

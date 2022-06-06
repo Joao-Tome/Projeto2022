@@ -59,7 +59,9 @@ public class MarcaController {
 			}else{
 				dao.update(obj);
 			}
+            model.addAttribute("mensagem","success");
 		} catch (Exception e) {
+            model.addAttribute("mensagem","erro");
 		}
         return "/marca/cadastro";
     }

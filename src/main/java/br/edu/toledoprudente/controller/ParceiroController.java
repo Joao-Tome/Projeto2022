@@ -53,14 +53,13 @@ public class ParceiroController {
 			}
 
 			if(obj.getId() == null){
-
                 dao.save(obj);
-
-
 			}else{
 				dao.update(obj);
 			}
+            model.addAttribute("mensagem","success");
 		} catch (Exception e) {
+            model.addAttribute("mensagem","erro");
 		}
         return "/parceiro/cadastro";
     }
