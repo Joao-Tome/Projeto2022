@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<div th:include="site/layoutSite :: head"></div>
+	
+	<title>Java 2022 - Home</title>
+</head>
+
+<body>
+
+    <!-- ***** Preloader Start ***** -->
+	<div th:include="site/layoutSite :: preloader"></div>
+    <!-- ***** Preloader End ***** -->
+
+    <!-- ***** Header Area Start ***** -->
+    <div th:include="site/layoutSite :: header"></div>
+    <!-- ***** Header Area End ***** -->
+
+
+    <div class="container" style="margin-top: 10rem">
+        <form method="post" th:action="@{/site/salvarSitePessoa}" th:object="${pessoa}">
+            <h1>Detalhes do Usuario</h1>
+    
+            <div class="row">
+              <div class="mb-3 col-md-6">
+                <input type="text" style="display: none" th:field="*{id}" />
+    
+                <label>Nome</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="PrimeiroNome"
+                  th:field="*{PrimeiroNome}"
+                  th:classappend="${#fields.hasErrors('PrimeiroNome')} ? 'is-invalid'"
+                />
+    
+                <div class="invalid-feedback">
+                  <span th:errors="*{PrimeiroNome}"></span>
+                </div>
+              </div>
+    
+              <div class="mb-3 col-md-6">
+                <label>Sobrenome</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="SobreNome"
+                  th:field="*{SobreNome}"
+                  th:classappend="${#fields.hasErrors('SobreNome')} ? 'is-invalid'"
+                />
+    
+                <div class="invalid-feedback">
+                  <span th:errors="*{SobreNome}"></span>
+                </div>
+              </div>
+    
+              <div class="mb-3 col-md-6">
+                <label>CPF</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="CPF"
+                  th:field="*{CPF}"
+                  th:classappend="${#fields.hasErrors('CPF')} ? 'is-invalid'"
+                />
+    
+                <div class="invalid-feedback">
+                  <span th:errors="*{CPF}"></span>
+                </div>
+              </div>
+            </div>
+    
+            <input type="submit" class="btn btn-primary" value="Salvar"/>
+    
+            <span th:text="${validacao}"></span>
+          </form>
+    </div>
+
+
+
+
+
+	<div th:include="site/layoutSite :: footer"></div>
+    <!-- ***** Footer Start ***** -->
+
+	<div th:include="site/layoutSite :: scripts"></div>
+
+    
+
+</body>
+</html>

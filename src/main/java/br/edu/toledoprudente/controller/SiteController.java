@@ -3,6 +3,7 @@ package br.edu.toledoprudente.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -31,13 +32,18 @@ public class SiteController {
 	@Autowired
 	NoticiaDAO daonoticia;
 
+	@Autowired
+	PessoaDAO daopessoa;
+
+	@ModelAttribute(name="usuariosession")
+	public Usuario usuarioLogado(){
+		return daousuario.getUsuarioLogado();
+	}
 
     @GetMapping("")
 	public String home(ModelMap model) {
 		var listaproduto = daoproduto.findAll();
 		var listanoticia = daonoticia.findAll();
-		
-		model.addAttribute("usuario", daousuario.getUsuarioLogado());
 
 		model.addAttribute("Produtos", listaproduto);
 
@@ -55,5 +61,81 @@ public class SiteController {
 
 		return "/site/produtodetalhes";
 	}
+
+
+
+
+	@PostMapping("/salvarSitePessoa")
+	public String salvarPessoaPeloSite(@Valid @ModelAttribute("pessoa") Pessoa obj, BindingResult result, ModelMap model){
+		
+		try {
+
+			if (result.hasErrors()){
+				return "/site/cadastroPessoa";
+			}
+
+			if(obj.getId() == null){
+				daopessoa.save(obj);
+			}else{
+				daopessoa.update(obj);
+			}
+			model.addAttribute("mensagem","success");
+
+			model.addAttribute("pessoa",obj);
+			model.addAttribute("usuario", new Usuario());
+			return "/site/CadastroUsuario";
+		} catch (Exception e) {
+			model.addAttribute("mensagem","erro");
+		}
+
+		return "/site/cadastroPessoa";
+		
+	}
+
+	@GetMapping("/cadastrarSitePessoa")
+	public String cadastrarPessoaPeloSite(ModelMap model){
+		model.addAttribute("pessoa", new Pessoa());
+		return "/site/cadastroPessoa";
+		
+	}
+
+
+	@PostMapping("/salvarSiteUsuario")
+	public String salvarUsuarioPeloSite(@Valid @ModelAttribute("usuario") Usuario obj, BindingResult result, ModelMap model){
+		
+		try {
+
+			if (result.hasErrors()){
+				return "/site/CadastroUsuario";
+			}
+			
+			String senha = obj.getSenha();
+			obj.setSenha(new BCryptPasswordEncoder().encode(senha));
+
+			if(obj.getId() == null){
+				daousuario.save(obj);
+			}else{
+				daousuario.update(obj);
+			}
+			model.addAttribute("mensagem","success");
+
+			model.addAttribute("pessoa",obj);
+			return "/login";
+		} catch (Exception e) {
+			model.addAttribute("mensagem","erro");
+		}
+
+		return "/site/CadastroUsuario";
+		
+	}
+
+	@GetMapping("/cadastrarSiteUsuario")
+	public String cadastrarUsuarioPeloSite(ModelMap model){
+		model.addAttribute("usuario", new Usuario());
+		return "/site/cadastroUsuario";
+		
+	}
+
+
 
 }
