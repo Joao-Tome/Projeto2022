@@ -28,6 +28,7 @@
               <th>Nome</th>
               <th>CNPJ</th>
               <th>Descricao</th>
+              <th>Imagem</th>
               <th>Açoes</th>
             </tr>
           </thead>
@@ -37,6 +38,7 @@
               <td th:text="${d.Nome}"></td>
               <td th:text="${d.CNPJ}"></td>
               <td th:text="${d.Descricao}"></td>
+              <td><img th:src="@{'/parceiro/getimagem/'+*{d.urlImage}}" width="60px" height="60px" style="object-fit: contain;" class="img-fluid"></td>
               <td>
                 <a
                   class="btn btn-primary"

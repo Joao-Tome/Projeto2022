@@ -17,7 +17,7 @@
   <div th:include="layout :: nav"></div>
   <div class="container">
 
-    <form Method="post" th:action="@{/parceiro/salvar}" th:object="${parceiro}">
+    <form Method="post" th:action="@{/parceiro/salvar}" th:object="${parceiro}" enctype="multipart/form-data">
 
       <h1>Cadastro de Parceiro</h1>
 
@@ -57,17 +57,21 @@
           <div class="invalid-feedback">
             <span th:errors="*{Descricao}"></span>
           </div>
+        </div>
 
+        <div class="mb-3 col-md-6">
+          <label>Imagem</label>
+          <input type="file" name="file" id="file" class="form-control">
+        </div>
 
-
-          <input type="submit" class="btn btn-primary">
+        <input type="submit" class="btn btn-primary">
 
     </form>
   </div>
-  
+
   <div th:include="layout :: footer"></div>
 
-    
+
   <script th:if="${mensagem} == success" th:inline="javascript">
     Swal.fire({
       title: 'Sucesso',

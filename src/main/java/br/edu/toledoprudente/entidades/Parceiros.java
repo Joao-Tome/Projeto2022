@@ -19,7 +19,8 @@ public class Parceiros extends AbstractEntity<Integer>{
 	@Column(name="Descricao", nullable = false, length = 80)
     private String Descricao;
 
-    
+    @Column(name="urlImage", length = 255)
+    private String urlImage;
 
 
     /**
@@ -62,6 +63,21 @@ public class Parceiros extends AbstractEntity<Integer>{
      */
     public void setDescricao(String Descricao) {
         this.Descricao = Descricao;
+    }
+
+
+    /**
+     * @return String return the urlImage
+     */
+    public String getUrlImage() {
+        return urlImage;
+    }
+
+    /**
+     * @param urlImage the urlImage to set
+     */
+    public void setUrlImage(String urlImage) {
+        this.urlImage = urlImage;
     }
 
 }

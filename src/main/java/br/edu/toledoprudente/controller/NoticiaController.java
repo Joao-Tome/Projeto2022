@@ -67,8 +67,7 @@ public class NoticiaController {
 				return "/noticia/cadastro";
 			}else{
                 if(file.isEmpty()){
-                    //MSG de retorno
-
+                    model.addAttribute("mensagem","erro");
                     return "/noticia/cadastro";
                 }else{
                     obj.setUrlImage(file.getOriginalFilename());
