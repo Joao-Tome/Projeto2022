@@ -25,7 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/webjars/**", "/css/**", "/image/**", "/js/**", "/fonts/**","/img/**").permitAll()
-                .antMatchers("/", "/service/getfuncionarios/**", "/produto/getimagem/**", "/site/**").permitAll()
+                .antMatchers("/", "/service/getfuncionarios/**", "/**/getimagem/**", "/site/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -38,7 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .invalidateHttpSession(true)
                 .clearAuthentication(true)
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/login")
+                .logoutSuccessUrl("/site")
                 .permitAll();
 
     }

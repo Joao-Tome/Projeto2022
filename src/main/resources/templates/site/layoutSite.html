@@ -54,13 +54,18 @@
                   <li class="scroll-to-section">
                     <a href="/site#produtos" class="menu-item">Produtos</a>
                   </li>
+                  <li class="scroll-to-section">
+                    <a href="/site#noticias" class="menu-item">Noticias</a>
+                  </li>
                   <li class="submenu" th:if="${usuario} != null">
                     <a href="javascript:;">Perfil</a>
                     <ul>
-                      <li><a href="" class="menu-item">Cadastrar Produto</a></li>
-                      <li><a href="" class="menu-item">Gerenciador</a></li>
-                      <li><a href="" class="menu-item">Sair</a></li>
+                      <li><a href="/home" class="menu-item">Gerenciador</a></li>
+                      <li><a href="/logout" class="menu-item">Sair</a></li>
                     </ul>
+                  </li>
+                  <li class="scroll-to-section" th:if="${usuario} == null">
+                    <a href="/login" class="menu-item">Entrar</a>
                   </li>
                 </ul>
                 <a class="menu-trigger">

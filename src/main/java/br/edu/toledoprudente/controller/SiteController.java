@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import br.edu.toledoprudente.dao.NoticiaDAO;
 import br.edu.toledoprudente.dao.PessoaDAO;
 import br.edu.toledoprudente.dao.ProdutoDAO;
 import br.edu.toledoprudente.dao.UsuarioDAO;
@@ -26,19 +27,33 @@ public class SiteController {
 
 	@Autowired
 	UsuarioDAO daousuario;
+	
+	@Autowired
+	NoticiaDAO daonoticia;
 
 
     @GetMapping("")
 	public String home(ModelMap model) {
-		var lista = daoproduto.findAll();
+		var listaproduto = daoproduto.findAll();
+		var listanoticia = daonoticia.findAll();
 		
 		model.addAttribute("usuario", daousuario.getUsuarioLogado());
 
-		model.addAttribute("Produtos", lista);
+		model.addAttribute("Produtos", listaproduto);
+
+		model.addAttribute("noticias", listanoticia);
 
 		return "/site/home";
 	}
 	
+	@GetMapping("/detalhes")
+	public String detalhesproduto(int id, ModelMap model){
+		
+		var produto = daoproduto.findById(id);
 
+		model.addAttribute("produto", produto);
+
+		return "/site/produtodetalhes";
+	}
 
 }
