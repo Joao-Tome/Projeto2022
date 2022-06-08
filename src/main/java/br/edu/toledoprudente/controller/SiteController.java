@@ -1,5 +1,7 @@
 package br.edu.toledoprudente.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +15,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.edu.toledoprudente.dao.NoticiaDAO;
+import br.edu.toledoprudente.dao.ParceiroDAO;
 import br.edu.toledoprudente.dao.PessoaDAO;
 import br.edu.toledoprudente.dao.ProdutoDAO;
 import br.edu.toledoprudente.dao.UsuarioDAO;
+import br.edu.toledoprudente.entidades.Parceiros;
 import br.edu.toledoprudente.entidades.Pessoa;
 import br.edu.toledoprudente.entidades.Usuario;
 
@@ -35,9 +39,18 @@ public class SiteController {
 	@Autowired
 	PessoaDAO daopessoa;
 
-	@ModelAttribute(name="usuariosession")
+	@Autowired
+	ParceiroDAO daoparceiro;
+
+
+	@ModelAttribute(name="usuariologado")
 	public Usuario usuarioLogado(){
 		return daousuario.getUsuarioLogado();
+	}
+
+	@ModelAttribute(name="parceiros")
+	public List<Parceiros> listausuario(){
+		return daoparceiro.findAll();
 	}
 
     @GetMapping("")

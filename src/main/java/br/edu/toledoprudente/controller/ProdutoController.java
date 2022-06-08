@@ -186,6 +186,7 @@ public class ProdutoController {
 		break;
 		} httpHeaders.setContentLength(arquivo.length);
 		HttpEntity<byte[]> entity = new HttpEntity<byte[]>( arquivo, httpHeaders);
-		return entity;}
+		return entity;
+	}
 
 }

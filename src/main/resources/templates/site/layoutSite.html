@@ -57,14 +57,14 @@
                   <li class="scroll-to-section">
                     <a href="/site#noticias" class="menu-item">Noticias</a>
                   </li>
-                  <li class="submenu" th:if="${usuariosession} != null">
+                  <li class="submenu" th:if="${usuariologado} != null">
                     <a href="javascript:;">Perfil</a>
                     <ul>
-                      <li th:if="${usuariosession.getTipousuario.descricao} == Administrador"><a href="/home" class="menu-item">Gerenciador</a></li>
+                      <li th:if="${usuariologado.getTipousuario.descricao} == Administrador"><a href="/home" class="menu-item">Gerenciador</a></li>
                       <li><a href="/logout" class="menu-item">Sair</a></li>
                     </ul>
                   </li>
-                  <li class="scroll-to-section" th:if="${usuariosession} == null">
+                  <li class="scroll-to-section" th:if="${usuariologado} == null">
                     <a href="/login" class="menu-item">Entrar</a>
                   </li>
                 </ul>
@@ -85,10 +85,10 @@
           <div class="footer-content">
             <div class="row">
               <div class="right-content col-lg-6 col-md-12 col-sm-12">
-                <h2><em>Parceiros</em></h2>
-                <p>
-                 
-                </p>
+                <h2 class="text-center"><em>Parceiros</em></h2>
+                <div class="d-flex align-center justify-content-center flex-row flex-wrap">
+                    <img th:each=" p : ${parceiros}" th:src="@{'/parceiro/getimagem/'+*{p.urlImage}}" class="text-center pt-3 pb-3" th:alt="${p.Nome}" style="display: block; margin: auto; width: 10rem;">
+                </div>
               </div>
               <div class="right-content col-lg-6 col-md-12 col-sm-12">
                 <h2>Mais Sobre <em>Java 2022</em></h2>
@@ -108,7 +108,7 @@
             <div class="col-lg-12">
               <div class="sub-footer">
                 <p>
-                  Copyright &copy; 2020 João Pedro Tomé / Toledo Prudente 
+                  Copyright &copy; 2022 João Pedro Tomé / Toledo Prudente 
                 </p>
               </div>
             </div>
