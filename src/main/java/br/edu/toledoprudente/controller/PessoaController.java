@@ -94,9 +94,13 @@ public class PessoaController {
 	@GetMapping("/excluir")
 	public String Excluir(int id, ModelMap model) {
 
-		dao.delete(id);
-		
-		return this.Listar(model);
+		try {
+            dao.delete(id);
+            
+        } catch (Exception e) {
+            model.addAttribute("mensagem","erroDelete");
+        }
+        return this.Listar(model);
 		
 	}
 

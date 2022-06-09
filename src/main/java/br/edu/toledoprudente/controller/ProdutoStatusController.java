@@ -77,7 +77,12 @@ public class ProdutoStatusController {
 
     @GetMapping("/excluir")
     public String excluir(int id, ModelMap model){
-        dao.delete(id);
+        try {
+            dao.delete(id);
+            
+        } catch (Exception e) {
+            model.addAttribute("mensagem","erroDelete");
+        }
         return this.listar(model);
     }
 }
