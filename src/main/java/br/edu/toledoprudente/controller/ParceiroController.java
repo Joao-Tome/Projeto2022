@@ -1,5 +1,6 @@
 package br.edu.toledoprudente.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -78,7 +79,11 @@ public class ParceiroController {
                     model.addAttribute("mensagem", "success");
 
                     byte[] bytes = file.getBytes();
-                    Path path = Paths.get(System.getProperty("user.dir") + "\\src\\main\\resources\\static\\imagens\\" + file.getOriginalFilename());
+                    File directory = new File(System.getProperty("user.dir") + "\\src\\main\\resources\\static\\imagens\\parceiro\\");
+                    Path path = Paths.get(System.getProperty("user.dir") + "\\src\\main\\resources\\static\\imagens\\parceiro\\" + file.getOriginalFilename());
+                    if(!directory.exists()){
+                        directory.mkdirs();
+                    }
                     Files.write(path, bytes);
 
                     model.addAttribute("mensagem","success");
@@ -112,7 +117,7 @@ public class ParceiroController {
     @ResponseBody
 	@RequestMapping(value = "/getimagem/{nome}", method = RequestMethod.GET)
 	public HttpEntity<byte[]> download(@PathVariable(value = "nome") String nome) throws IOException {
-		byte[] arquivo =Files.readAllBytes( Paths.get(System.getProperty("user.dir") +"\\src\\main\\resources\\static\\imagens\\" + nome));
+		byte[] arquivo =Files.readAllBytes( Paths.get(System.getProperty("user.dir") +"\\src\\main\\resources\\static\\imagens\\parceiro\\" + nome));
 		HttpHeaders httpHeaders = new HttpHeaders();
 		switch (nome.substring(nome.lastIndexOf(".") + 1).toUpperCase()) {
 		case "JPG":
