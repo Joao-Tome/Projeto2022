@@ -1,5 +1,6 @@
 package br.edu.toledoprudente.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -21,6 +22,7 @@ import br.edu.toledoprudente.dao.ProdutoDAO;
 import br.edu.toledoprudente.dao.UsuarioDAO;
 import br.edu.toledoprudente.entidades.Parceiros;
 import br.edu.toledoprudente.entidades.Pessoa;
+import br.edu.toledoprudente.entidades.Produto;
 import br.edu.toledoprudente.entidades.Usuario;
 
 @Controller
@@ -55,7 +57,13 @@ public class SiteController {
 
     @GetMapping("")
 	public String home(ModelMap model) {
-		var listaproduto = daoproduto.findAll();
+		List<Produto> listaprodutodestaque = daoproduto.getdestaque();
+		List<Produto> listaprodutotodos = daoproduto.getnodestaque();
+		
+		List<Produto> listaproduto = new ArrayList<Produto>();
+		listaproduto.addAll(listaprodutodestaque);
+		listaproduto.addAll(listaprodutotodos);
+
 		var listanoticia = daonoticia.findAll();
 
 		model.addAttribute("Produtos", listaproduto);

@@ -31,11 +31,13 @@
                             <img th:src="@{'/produto/getimagem/'+*{d.imagem}}" alt="">
                             <h4 th:text="${d.Nome}"></h4>
                             <p th:text="${d.categoria.Descricao}"></p>
+                            <p th:text="${d.prodstatus.Status}"></p>
                             <p>R$ <span th:text="${d.valor}"></p>
                             <a th:href="@{/site/detalhes(id=${d.id})}" class="main-button">
                                 Detalhes
                             </a>
                         </div>
+                        
                     </div>
                 </div>
             </div>
